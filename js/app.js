@@ -15,61 +15,12 @@ let firstStar = 1;
 let secondStar = 2;
 let  thirdStar = 10;
 let star = 3;
+let timer;
+let sec =0;
 cardHTML();
 Game();
-
-
-
-
-
-/*function Time() {
-  currentTimer = setInterval(function () {
-
-    $(".timer").text(second);
-    second = second + 1
-  }, 1000);
-}
-*/
-function stars (){
-
-  
-    
-    if( moves === thirdStar) {
-    $(".fa-star").eq(0).removeClass('fa-star').addClass('fa-star-o');
-    star = 2;
-    }
-    if ( moves === secondStar) {
-    $(".fa-star").eq(1).removeClass('fa-star').addClass('fa-star-o');
-    star = 1;
-  }
-
-    if(moves===firstStar) {
-    $(".fa-star").eq(2).removeClass('fa-star').addClass('fa-star-o');
-    star = 0;
-    }
-  
-}
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-function cardHTML(){
-let listCard = shuffle(cards);
-listCard.forEach(appendCard) ;
-
-
-}
-
-function appendCard(card) {
-  deck.append('<li class="card" ><i class="fa ' + card +'"></i></li>');
-
-}
-
-
-
+startTimer();
+ 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -85,12 +36,27 @@ function shuffle(array) {
     return array;
 }
 
+//loop through each card and create its HTML
+function appendCard(card) {
+  deck.append('<li class="card" ><i class="fa ' + card +'"></i></li>');
+
+}
+
+ //add each card's HTML to the page
+function cardHTML(){
+let listCard = shuffle(cards);
+listCard.forEach(appendCard) ;
+
+}
 
 //Initiate start of game by displaying a cards symbol
 function Game(){
-//Time();
 
 $(".card").click(function(){
+  $(".card").submit (function(event) {
+
+   event.preventDefault();
+  });
   startgame = true;
   if ($(this).hasClass("open show")) { return; }
 
@@ -101,6 +67,8 @@ $(".card").click(function(){
 
      
 });
+
+//Function to find a match
 function Match(){
 
 
@@ -114,32 +82,30 @@ function Match(){
    
         matchMade ++;
         moves++;
-                disableCards();
-                deleteCards();
-                addMoves();
-                stars();
+       // disableCards();
+        deleteCards();
+        addMoves();
+        stars();
 
     } else {
       
       openCards[0].addClass('wrong').animateCss('swing');
       (openCards[1].addClass('wrong').animateCss('swing'), delay/0.5);
       moves++;
-      
-                        addMoves();
-                        stars();
-            deleteCards();
-            setTimeout(function () {
-          remove() }, delay /0.5);
-          
-        disableCards();
+      setTimeout(function () {
+      remove() }, delay /0.5);
+     // disableCards();
+      deleteCards();
+      addMoves();
+      stars();
     }
   }
 
   if(matchMade === 1) {
-     
+     clearInterval(timer);
      swal( {
       title: "Good job!", 
-      text:"You finished the game with " + moves +" moves" + " " + star + " star(s)", 
+      text:"You finished the game with " + moves +" moves," + star + " star(s) in " + sec + " seconds", 
       type:"success",
       showSuccessButton:true,
       confirmButtonClass:"btn-success",
@@ -148,6 +114,7 @@ function Match(){
      }).then (function(isConfirm) {
        if(isConfirm){
         reset();
+        
        }
       });
       
@@ -164,32 +131,79 @@ function Match(){
 }
 
 }
-
+//function to remove the card display
 function remove () {
   $(".card").removeClass("open show flash pulse swing wrong");
 
 }
+//function to add number of moves to html page
  function addMoves() {
   $(".moves").html(moves);
  }
+
+ //function to disable card click
 function disableCards (){
   openCards.forEach( function(card) {
-    // statements
+  
     card.off("click");
   });
    
 }
 
-
+  //Function to reset game
   function reset() {
    openCards = [];
    $(".card").removeClass("open show flash pulse swing wrong match");
    moves = 0;
+   $(".seconds").html("0");
+   
    addMoves();
    matchMade = 0;
-   $(".fa-star").removeClass('fa-star-o');
+   deck.empty();
+   cardHTML();
+   Game();
+   sec=0;
+   $(".fa-star").removeClass("fa-star-o").addClass("fa-star");
+ 
+   startTimer();
   }
 
+//function to remove stars based on number of moves made
+function stars (){
+
+    if( moves === thirdStar) {
+    $(".fa-star").eq(0).removeClass('fa-star').addClass('fa-star-o');
+    star = 2;
+    }
+    if ( moves === secondStar) {
+    $(".fa-star").eq(1).removeClass('fa-star').addClass('fa-star-o');
+    star = 1;
+  }
+
+    if(moves===firstStar) {
+    $(".fa-star").eq(2).removeClass('fa-star').addClass('fa-star-o');
+    star = 0;
+    }
+  
+}
+
+  //Reset button click
+  $(".fa-repeat").click(function() {
+    reset();
+  });
+
+//start timer when a card is clicked on 
+function startTimer() {
+  let cardclick = 0;
+  $(".card").click(function() {
+    cardclick += 1;
+    if (cardclick === 1) {
+      timer = setInterval( function(){
+        $(".seconds").html(++sec);
+      }, 1000);
+    }
+  })
+ }
 
 //Add animation to game 
 $.fn.extend({
@@ -218,15 +232,3 @@ $.fn.extend({
     return this;
   },
 });
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
-
-
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
