@@ -3,7 +3,7 @@
 
  */
 $(".modal").hide();
-let cards = ["fa-diamond", "fa-diamond", "fa-paper-plane-o", "fa-paper-plane-o", "fa-anchor", "fa-anchor", "fa-bolt", "fa-bolt", "fa-cube", "fa-cube", "fa-anchor", "fa-anchor", "fa-leaf", "fa-leaf", "fa-bicycle", "fa-bicycle"];
+let cards = ["fa-coffee", "fa-coffee", "fa-bomb", "fa-bomb", "fa-anchor", "fa-anchor", "fa-bolt", "fa-bolt", "fa-bell", "fa-bell", "fa-anchor", "fa-anchor", "fa-flask", "fa-flask", "fa-gavel", "fa-gavel"];
 let deck = $(".deck");
 let openCards =[];
 let startgame=true;
@@ -49,7 +49,7 @@ listCard.forEach(appendCard) ;
 
 }
 
-//Initiate start of game by displaying a cards symbol
+//Initiate start of game by displaying cards
 function Game(){
 
 $(".card").click(function(){
@@ -100,7 +100,7 @@ function Match(){
       stars();
     }
   }
-
+//if match made return results
   if(matchMade === 1) {
      clearInterval(timer);
      swal( {

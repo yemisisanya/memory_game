@@ -40,7 +40,7 @@ h1 {
 .deck {
     width: 660px;
     min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    background: linear-gradient(160deg, pink 0%, #aa7ecd 100%);
     padding: 32px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
@@ -72,19 +72,19 @@ h1 {
 }
 
 .deck .card.show {
-    font-size: 33px;
+    font-size: 43px;
 }
 
 .deck .card.match {
     cursor: default;
     background: #02ccba;
-    font-size: 33px;
+    font-size: 43px;
 }
 
 .deck .card.wrong {
     cursor: default;
-    background: red;
-    font-size: 33px;
+    background: #800000;
+    font-size: 43px;
 }
 /*
  * Styles for the Score Panel
