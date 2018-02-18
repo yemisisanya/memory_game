@@ -104,7 +104,7 @@ function Game() {
             clearInterval(timer);
             swal({
                 title: "Good job!",
-                text: "You finished the game with " + moves + " moves," + star + " star(s) in " + sec + " seconds",
+                text: "You finished the game with " + moves + " moves, " + star + " star(s) in " + sec + " seconds",
                 type: "success",
                 allowEscapeKey: false,
                 allowOutsideClick: false,
