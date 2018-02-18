@@ -73,20 +73,15 @@ function Game() {
         if (openCards.length === 2) {
 
             if (openCards[0][0].firstChild.className === openCards[1][0].firstChild.className) {
-
-
                 openCards[0].addClass('match').animateCss('rubberBand');
                 openCards[1].addClass('match').animateCss('rubberBand');
-
                 matchMade++;
                 moves++;
                 // disableCards();
                 deleteCards();
                 addMoves();
                 stars();
-
             } else {
-
                 openCards[0].addClass('wrong').animateCss('swing');
                 (openCards[1].addClass('wrong').animateCss('swing'), delay / 0.5);
                 moves++;
@@ -99,7 +94,7 @@ function Game() {
                 stars();
             }
         }
-        //if match made, return results. Sweetalert.js.org
+        //if match made, return results || Sweetalert.js.org || https://github.com/PoBlue/memory-game
         if (matchMade === 8) {
             clearInterval(timer);
             swal({
@@ -115,22 +110,13 @@ function Game() {
             }).then(function(isConfirm) {
                 if (isConfirm) {
                     reset();
-
                 }
             });
-
-
         }
-
-
         function deleteCards() {
             openCards = [];
         }
-
-
-
     }
-
 }
 //function to remove the card display
 function remove() {
@@ -150,7 +136,6 @@ function disableCards() {
     });
 
 }
-
 //Function to reset game
 function reset() {
     openCards = [];
@@ -166,7 +151,6 @@ function reset() {
     resetStars();
     startTimer();
 }
-
 //function to remove stars based on number of moves made
 function stars() {
 
@@ -183,18 +167,14 @@ function stars() {
         $(".fa-star").eq(2).removeClass('fa-star').addClass('fa-star-o');
         star = 2;
     }
-
 }
-
 //Reset stars
-
 function resetStars() {
     $(".fa-star-o").remove();
     $(".fa-star").remove();
 
     for (var i = 0; i < 3; ++i) {
         $(".stars").append('<li><i class="fa fa-star"></i></li>');
-
     }
 }
 //Reset button click
@@ -202,7 +182,7 @@ $(".fa-repeat").click(function() {
     reset();
 });
 
-//start timer when a card is clicked on 
+//start timer when a card is clicked on || https://github.com/shannonj498/memory-matching-game/
 function startTimer() {
     let cardclick = 0;
     $(".card").click(function() {
