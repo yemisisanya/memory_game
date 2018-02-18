@@ -67,7 +67,7 @@ h1 {
 
 .deck .card.open {
     transform: rotateY(0);
-    background: #02b3e4;
+    background: #0a2463;
     cursor: default;
 }
 
@@ -77,13 +77,13 @@ h1 {
 
 .deck .card.match {
     cursor: default;
-    background: #02ccba;
+    background: #ca1c8c;
     font-size: 43px;
 }
 
 .deck .card.wrong {
     cursor: default;
-    background: #800000;
+    background: #2F0000;
     font-size: 43px;
 }
 /*
@@ -120,6 +120,6 @@ margin: 0;
     float: right;
     cursor: pointer;
 }
-.fa-star-o{
+.fa-star-o {
     color: pink;
 }

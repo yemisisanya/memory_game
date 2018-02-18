@@ -2,19 +2,16 @@
 
 ## Table of Contents
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+* [About Memory Game](#AboutMemoryGame)
+* [How To Play](#HowToPlay)
 
-## Instructions
+## About Memory Game
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+The project has some HTML,CSS and JAVASCRIPT styling to display an interactive Memory Game project. The app's functionality was built mostly using Javascript.
 
-To get started, open `js/app.js` and start building out the app's functionality
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+## How To Play
 
-## Contributing
+Each card holder has a face, once clicked will display a card. To win the game, two cards must match with the same face until the all cards on the deck are facing up and are a match. There is a timer, the game counts the number of moves made and displays a star rating once you win the game. 
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+You can play the game [here](https://yemisisanya.github.io/memory_game/index.html).

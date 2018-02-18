@@ -1,14 +1,14 @@
-let cards = ["fa-coffee", "fa-coffee", "fa-bomb", "fa-bomb", "fa-anchor", "fa-anchor", "fa-bolt", "fa-bolt", "fa-bell", "fa-bell", "fa-anchor", "fa-anchor", "fa-flask", "fa-flask", "fa-gavel", "fa-gavel"];
+let cards = ["fa-coffee", "fa-coffee", "fa-bomb", "fa-bomb", "fa-anchor", "fa-anchor", "fa-bolt", "fa-bolt", "fa-bell", "fa-bell", "fa-leaf", "fa-leaf", "fa-flask", "fa-flask", "fa-gavel", "fa-gavel"];
 let deck = $(".deck");
 let openCards = [];
 let startgame = true;
 let moves = 0;
 let matchMade = 0;
-let delay = 400;
+let delay = 500;
 let second = 0;
-let firstStar = 1;
-let secondStar = 2;
-let thirdStar = 10;
+let firstStar = 8;
+let secondStar = 20;
+let thirdStar = 30;
 let star = 3;
 let timer;
 let sec = 0;
@@ -99,16 +99,18 @@ function Game() {
                 stars();
             }
         }
-        //if match made, return results
-        if (matchMade === 1) {
+        //if match made, return results. Sweetalert.js.org
+        if (matchMade === 8) {
             clearInterval(timer);
             swal({
                 title: "Good job!",
                 text: "You finished the game with " + moves + " moves," + star + " star(s) in " + sec + " seconds",
                 type: "success",
+                allowEscapeKey: false,
+                allowOutsideClick: false,
                 showSuccessButton: true,
                 confirmButtonClass: "btn-success",
-                confirmButtonText: "Play Again!",
+                confirmButtonText: "Restart",
                 closeOnConfirm: true
             }).then(function(isConfirm) {
                 if (isConfirm) {
@@ -161,7 +163,7 @@ function reset() {
     cardHTML();
     Game();
     sec = 0;
-    $(".fa-star").removeClass("fa-star-o");
+    resetStars();
     startTimer();
 }
 
@@ -170,7 +172,7 @@ function stars() {
 
     if (moves === thirdStar) {
         $(".fa-star").eq(0).removeClass('fa-star').addClass('fa-star-o');
-        star = 2;
+        star = 0;
     }
     if (moves === secondStar) {
         $(".fa-star").eq(1).removeClass('fa-star').addClass('fa-star-o');
@@ -179,11 +181,22 @@ function stars() {
 
     if (moves === firstStar) {
         $(".fa-star").eq(2).removeClass('fa-star').addClass('fa-star-o');
-        star = 0;
+        star = 2;
     }
 
 }
 
+//Reset stars
+
+function resetStars() {
+    $(".fa-star-o").remove();
+    $(".fa-star").remove();
+
+    for (var i = 0; i < 3; ++i) {
+        $(".stars").append('<li><i class="fa fa-star"></i></li>');
+
+    }
+}
 //Reset button click
 $(".fa-repeat").click(function() {
     reset();
